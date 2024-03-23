@@ -1,0 +1,209 @@
+body {
+  font-family: "arial black";
+  background-color: rgb(214, 248, 251);
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgb(214, 248, 251);
+}
+#mute{
+  text-align: left;
+  margin: 5px 5px;
+  border-radius: 20px;
+  background-color: white;
+}
+h1{
+  font-size: 26px;
+  font-family:"Meiryo";
+  padding-top: 9px;
+  padding-bottom: 9px;
+  text-align: center;
+  margin: 0 auto;
+  background-color: rgb(214, 248, 251);
+}
+h2{
+  font-size: 20px;
+  font-weight: bold;
+}
+h3{
+  text-align: left;
+  margin-left: 15px;
+  padding-bottom: 10px;
+  font-family: "serif";
+}
+p {
+  font-size: 14px;
+  font-family: "serif";
+}
+.info{
+  margin-top: 15px;
+  margin-left: 35px;
+  padding-bottom: 10px;
+}
+.note{
+  color: darkblue;
+  margin-left: 15px;
+  font-size: 12px;
+}
+#myMap{
+  margin-bottom: 15px;
+}
+.input_keyword{
+  margin-bottom: 16px;
+  background-color: rgb(214, 248, 251);
+}
+#hint{
+  text-decoration: underline;
+  font-size: small;
+  color: blue;
+  margin-left: 6px;
+}
+#keyword {
+  margin-left: 15px;
+}
+#memo{
+  margin-left: 35px;
+  padding-bottom: 10px;
+}
+#reward{
+  margin-left: 35px;
+  color: darkblue;
+  font-weight: bold;
+}
+.items{
+  background-color: rgb(255, 254, 240);
+  padding-top: 15px;
+  padding-bottom: 10px;
+}
+.itemarea{
+  margin-left: 15px;
+}
+#myitem{
+  display: flex;
+  gap: 3px;
+}
+.hidden{
+  visibility: hidden;
+}
+#popup-wrapper, #popup-wrapper2 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  border-radius:10px;
+}
+#popup-inside {
+  text-align: center;
+  width: 100%;
+  max-width: 300px;
+  background:rgb(131, 243, 245);
+  margin: 15% 15%;
+  padding: 10px;
+  position: relative;
+  border-radius:10px;
+  font-size: 12px;
+}
+#popup-inside2 {
+  text-align: center;
+  width: 100%;
+  max-width: 100px;
+  background: darkblue;
+  color:white;
+  margin: 11% 15%;
+  padding: 20px;
+  position: relative;
+  border-radius:10px;
+  font-size: 12px;
+}
+#close {
+  position: absolute;
+  top: 4px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 12px;
+}
+#reward, #mute, #jump, #hint, #save:hover {
+  cursor: pointer;
+}
+#photo {
+  width: 300px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+/* チャットエリア */
+.mario{
+  text-align: left;
+  margin-left: 15px;
+}
+.kinopio{
+  text-align: left;
+  margin-left: 35px;
+}
+.haikei{
+  background-color: rgb(214, 248, 251);
+  padding-bottom: 15px;
+}
+#color{
+	margin-left: 15px;
+	margin-top: 10px;
+}
+.flex{
+	padding-left: 10px;
+}
+.area{
+	padding-left: 15px;
+  padding-bottom: 5px;
+}
+#text{
+  margin-left: 7px;
+}
+.btn-box {
+  width: 20%;
+  height: 10px;
+  margin: 2px;
+  margin-top: 0px;
+}
+.btn-box button {
+  padding: 3px 10px 1px 10px;
+  border: none;
+  border-radius: 8px;
+  user-select: none;
+  cursor: pointer;
+}
+/* ボタンをマウスホバーしたとき、ボタンを薄くする */
+.btn-box button:hover {
+  opacity: 0.7;
+}
+/* ボタンをクリックしたとき、ボタンを下に移動する */
+.btn-box button:active {
+  transform: translateY(0.2em);
+}
+/* ボタンのスタイル */
+.btn-box button.btn-send {
+  color: #fff;
+  background-color: #f37e1e;
+  box-shadow: 0 0.3em 0 #cb4106;
+}
+.btn-box button.btn-send:active {
+  box-shadow: 0 0.1em 0 #cb4106;
+}
+#mensaje{
+  overflow: auto;
+  height: 400px;
+}
+#mensaje::-webkit-scrollbar{
+  display: none;
+}
+.flex{
+	display: flex;
+	width: 500px;
+}
+.remove:hover{
+  background:rgb(248, 218, 153)
+}
+.update:hover{
+  background:rgb(129, 243, 148)
+}

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <script src="js/jquery-2.1.3.min.js"></script>
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="./img/poi_custom.png">
+  <title>MapDeQuest</title>
+  <style>html,body {height: 100%;}body{padding: 0; margin: 0;}</style>
+  </style>
+</head>
+
+<body>
+  <div class="header">
+    <button id="mute">BGMオン</button>
+    <audio id="audioPlayer">
+      <source src="./sound/mariachi.mp3">
+      </source>
+    </audio>
+    <h1>MapDeQuest</h1>
+  </div>
+  <!-- MAP[START] -->
+  <div id="myMap" style='width:100%;height:50%;float:left;display:block;'></div>
+  <!-- MAP[END] -->
+
+  <!-- キーワード入力・表示エリア -->
+  <div class=input_keyword>
+    <h3>キーワードを入力
+      <span id="hint">もう一度見る</span>
+    </h3>
+    <input id="keyword" type=text></input>
+    <button id="save">保存</button>
+    <a href="index2.html" style="margin-left: 6px;">次の問題</a>
+    <div class="info">手に入れたキーワード<span class="note">３個集めるごとにレアアイテムをゲットできるよ！</span></div>
+    <div id="memo"></div>
+  </div>
+
+  <!-- アイテム表示エリア -->
+  <div class="items">
+    <h3>アイテムコレクション</h3>
+    <div class="itemarea">
+      <ul id="myitem">
+        <li id="item1" class="hidden"><img src="./img/numero1.png" alt=""
+            style="width: 100px; border: 5px solid #974d034c;"></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ポップアップ -->
+  <div id="popup-wrapper">
+    <div id="popup-inside">
+      <h2>＼正解／</h2><br>
+      <p>アイテムゲット！</p><br>
+      <p>キーワードは「マヤ文明」だよ</p><br>
+      <button id="jump">キーワードを入力する</button>
+      <img id=photo src="./img/chechen.jpg" ; height:30px; width:30px;>
+      <p><a href="https://worldheritagesite.xyz/chichen-itza/" target="_blank">チェチェン・イッツァについて調べる</a></p>
+    </div>
+  </div>
+  <div id="popup-wrapper2">
+    <div id="popup-inside2">
+      <div id="close">x</div>
+      <p>残念、不正解</p>
+    </div>
+  </div>
+
+  <!-- チャットエリア -->
+  <div class="haikei">
+    <h1>クエスト掲示板</h1>
+    <div class="area">送信者：
+      <select name="sender" id="uname">
+        <option value="マリオ">マリオ</option>
+        <option value="ヨッシー">ヨッシー</option>
+      </select>
+    </div>
+    <div class="flex">
+      <textarea id="text" cols="44" rows="5"></textarea>
+      <div class="btn-box">
+        <button id="send" class="btn-send">送信</button>
+      </div>
+    </div>
+    <input type="color" id="color">文字の色
+  </div>
+  <!-- チャット表示エリア -->
+  <main id="mensaje">
+    <div id="output"></div>
+  </main>
+
+  <!-- サウンド -->
+  <audio src="./sound/itemget.mp3" id="play_sound_get"></audio>
+  <audio src="./sound/false.mp3" id="play_sound_false"></audio>
+
+  <!-- 以下地図表示 -->
+  <script
+    src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap&key='
+    async defer></script>
+  <script src="/js/BmapQuery.js"></script>
+  <script>
+    // BingMaps&BmapQuery
+    //Init
+    function GetMap() {
+      //1. Instance
+      const map = new Bmap("#myMap");
+
+      //2. Display Map
+      map.startMap(20.683060, -88.568610, "load", 10); //チェチェン・イッツァー
+      let center = map.getCenter();
+      //3.Create custom Pushpin
+      let pin = map.pinIcon(20.683060, -88.568610, "./img/poi_custom.png", 1.0, 0, 0);
+
+      //4. Add Infobox-Actions(Event)
+      // map.onInfobox(lat, lon, "title","description", "text or html");
+      //Configuration
+      const title = "第１問";
+      const discript = '<div style="width:200px;color:black;">この場所にあるピラミッドは何？</div>';
+      const actions =
+        [
+          //1.action（不正解の場合）
+          {
+            label: 'テオティワカン',
+            eventHandler: function () { //function
+              // map.crearInfobox();
+              //ポップアップ表示
+              const popupWrapper2 = document.getElementById('popup-wrapper2');
+              popupWrapper2.style.display = "block";
+              const popupWrapper = document.getElementById('popup-wrapper');
+              popupWrapper.style.display = "none";
+              $("#play_sound_false").get(0).play();
+              // 「x」のマークをクリックしたときポップアップを閉じる
+              $("#close").on("click", function () {
+                popupWrapper2.style.display = 'none';
+              })
+            }
+          },
+          //2.action（正解の場合）
+          {
+            label: 'チェチェン・イッツァ',
+            eventHandler: function () { //function
+              map.crearInfobox();
+              //ポップアップ表示
+              const popupWrapper = document.getElementById('popup-wrapper');
+              popupWrapper.style.display = "block";
+              const popupWrapper2 = document.getElementById('popup-wrapper2');
+              popupWrapper2.style.display = 'none';
+              $("#item1").removeClass("hidden");
+              $("#play_sound_get").get(0).play();
+              // 「キーワードを入力」でポップアップを閉じる
+              $("#jump").on("click", function () {
+                popupWrapper.style.display = 'none';
+              })
+            }
+          }
+        ];
+      //Create Event to Infobox
+      map.onInfobox(20.683060, -88.568610, title, discript, actions);
+    }
+
+    //キーワードをSaveボタンで配列にする
+    const arr = []
+    $("#save").on("click", function () {
+      const keywords = $("#keyword").val();
+      arr.push(keywords);
+      // 配列に保存されたkeywordsを画面に表示する
+      const keywordsElements = [];
+      for (let i = 0; i < arr.length; i++) {
+        keywordsElements.push('<li>' + arr[i] + '</li>');
+      }
+      console.log(keywordsElements);
+      $("#memo").html(keywordsElements);
+      // 次のページで再表示できるようにローカルストレージにJSONで保存する
+      const serialized = JSON.stringify(keywordsElements);
+      localStorage.setItem("memo", serialized)
+      // キーワード入力欄をクリアする（複数入力不可とする）
+      $("#keyword").val("");
+      $("#keyword").prop('disabled',true);
+    });
+
+    // 「もう一度見る」でリロード
+    $("#hint").on("click", function () {
+      location.reload();
+    });
+
+    // muteの切り替え
+    $(document).ready(function () {
+      var audio = $("#audioPlayer")[0];
+      $("#mute").click(function () {
+        if (audio.paused) {
+          audio.play();
+          $(this).text("BGM オフ");
+        } else {
+          audio.pause();
+          $(this).text("BGM オン");
+        }
+      });
+    });
+  </script>
+  <script type="module" src="js/main.js"></script>
+</body>
+
+</html>
