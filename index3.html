@@ -103,8 +103,9 @@
       const map = new Bmap("#myMap");
 
       //2. Display Map
-      map.startMap(22.878733, -109.884848, "load", 10); //ロスカボス
+      map.startMap(22.878733, -109.884848, "streetside", 14); //ロスカボス
       let center = map.getCenter();
+      
       //3.Create custom Pushpin
       let pin = map.pinIcon(22.878733, -109.884848, "./img/poi_custom.png", 1.0, 0, 0);
 
@@ -112,7 +113,7 @@
       // map.onInfobox(lat, lon, "title","description", "text or html");
       //Configuration
       const title = "第３問";
-      const discript = '<div style="width:200px;color:black;">この海岸がある街の名前は何？</div>';
+      const discript = '<div style="width:200px;color:black;">このリゾートがある街の名前は？</div>';
       const actions =
         [
           //1.action（正解の場合）
