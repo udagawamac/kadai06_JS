@@ -104,8 +104,9 @@
       const map = new Bmap("#myMap");
 
       //2. Display Map
-      map.startMap(21.608330, -87.989720, "load", 10); //コロラーダス
+      map.startMap(21.608330, -87.989720, "aerial", 13); //コロラーダス
       let center = map.getCenter();
+      
       //3.Create custom Pushpin
       let pin = map.pinIcon(21.608330, -87.989720, "./img/poi_custom.png", 1.0, 0, 0);
 
