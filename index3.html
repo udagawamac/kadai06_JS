@@ -103,11 +103,11 @@
       const map = new Bmap("#myMap");
 
       //2. Display Map
-      map.startMap(22.878733, -109.884848, "load", 6); //ロスカボス
+      map.startMap(23.053608, -109.703990, "load", 7); //ロスカボス
       let center = map.getCenter();
       
       //3.Create custom Pushpin
-      let pin = map.pinIcon(22.878733, -109.884848, "./img/poi_custom.png", 1.0, 0, 0);
+      let pin = map.pinIcon(23.053608, -109.703990, "./img/poi_custom.png", 1.0, 0, 0);
 
       //4. Add Infobox-Actions(Event)
       // map.onInfobox(lat, lon, "title","description", "text or html");
@@ -153,7 +153,7 @@
           }
         ];
       //Create Event to Infobox
-      map.onInfobox(22.878733, -109.884848, title, discript, actions);
+      map.onInfobox(23.053608, -109.703990, title, discript, actions);
     }
 
     // ローカルストレージからデータを取得して配列に戻し、表示
